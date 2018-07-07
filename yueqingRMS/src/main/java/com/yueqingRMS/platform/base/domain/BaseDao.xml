@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yueqingRMS.platform.base.domain.BaseDao">
+
+	<!-- oracle -->
+	<!-- 分页sql开头 -->
+<!-- 	<sql id="oraclePageStart"> -->
+<!-- 		<![CDATA[ -->
+<!-- 			SELECT * FROM ( SELECT A.*, ROWNUM RN FROM ( -->
+<!-- 		]]> -->
+<!-- 	</sql> -->
+
+	<!-- 分页sql结尾 -->
+<!-- 	<sql id="oraclePageEnd"> -->
+<!-- 		<![CDATA[ -->
+<!-- 			) A WHERE ROWNUM <= #{rowEnd} ) WHERE RN >= #{rowStart} -->
+<!-- 		]]> -->
+<!-- 	</sql>	 -->
+	
+	
+	<!-- mysql -->
+<!-- 分页sql开头 -->
+<!-- 	<sql id="mysqlPageStart"> -->
+<!-- 		<![CDATA[ -->
+<!-- 			select row_.* from ( -->
+<!-- 		]]> -->
+<!-- 	</sql> -->
+
+	<!-- 分页sql结尾 -->
+<!-- 	<sql id="mysqlPageEnd"> -->
+<!-- 		<![CDATA[ -->
+<!-- 			) row_ limit #{rowStart},#{pageSize} -->
+<!-- 		]]> -->
+<!-- 	</sql>	 -->
+	
+</mapper>
