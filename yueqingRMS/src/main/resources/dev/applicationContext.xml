@@ -18,8 +18,15 @@
             	default-lazy-init="true"
              > 
 <!--      default-lazy-init="true" -->
-    
-  	<bean id="messageSource"
+
+	<!-- spring容器bean工具类     -->
+	<!-- 因为全局设置为 default-lazy-init="true"   所以容器中手动注册的bean需要取消lazy 即添加：lazy-init="false" -->
+	<bean id="SpringContextHolder" class="com.yueqingRMS.platform.util.SpringContextHolder" lazy-init="false" />  
+  	<!--全局异常捕捉 -->
+	<bean class="com.yueqingRMS.platform.exception.GlobalExceptionResolver.GlobalExceptionResolver"  lazy-init="false" />
+
+	<!-- 以session方式实现国际化 start -->
+	<bean id="messageSource"
 		class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
 		<!--刷新资源文件的周期，以秒为单位 -->
 		<property name="cacheSeconds" value="${message.cache_seconds}" />
@@ -31,15 +38,9 @@
 			</list>
 		</property>
 	</bean>
-	<!-- 以session方式实现国际化 -->
 	<bean id="localeResolver" class="org.springframework.web.servlet.i18n.SessionLocaleResolver">
 		<property name="defaultLocale" value="${locale}" />
 	</bean>
-	
-	<!--集成Mybatis-->  
-    <import resource="applicationContext-mybatis.xml"/> 
-    <!--集成邮件功能-->  
-    <import resource="applicationContext-mail.xml"/>
-  	<!-- 定时任务 -->
-	<import resource="applicationContext-quartz.xml"/>
+	<!-- 以session方式实现国际化 end-->
+    
 </beans> 

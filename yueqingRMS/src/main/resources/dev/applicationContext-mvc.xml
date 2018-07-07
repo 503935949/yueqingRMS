@@ -137,12 +137,15 @@
 		<property name="maxUploadSize" value="-1" /> <!-- 最大文件大小，-1为无限止(-1) -->
 	</bean>
 	
-	<!-- spring容器bean工具类     -->
-	<!-- 因为全局设置为 default-lazy-init="true"   所以容器中手动注册的bean需要取消lazy 即添加：lazy-init="false" -->
-	<bean id="SpringContextHolder" class="com.yueqingRMS.platform.util.SpringContextHolder" lazy-init="false" />  
-  	<!--全局异常捕捉 -->
-	<bean class="com.yueqingRMS.platform.exception.GlobalExceptionResolver.GlobalExceptionResolver"  lazy-init="false" />
 	
+	<!--容器-->  
+    <import resource="applicationContext.xml"/>
+    <!--集成Mybatis-->  
+    <import resource="applicationContext-mybatis.xml"/> 
+    <!--集成邮件功能-->  
+    <import resource="applicationContext-mail.xml"/>
+  	<!-- 定时任务 -->
+	<import resource="applicationContext-quartz.xml"/>
 	
 </beans>
 
