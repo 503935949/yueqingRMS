@@ -4,7 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.catalina.connector.ResponseFacade;
+//import org.apache.catalina.connector.ResponseFacade;
 //import org.apache.catalina.connector.RequestFacade;
 //import org.apache.catalina.connector.ResponseFacade;
 import org.aspectj.lang.JoinPoint;
@@ -119,11 +119,11 @@ public class ProjectAspect {
         //冲方法参数中获取response
         //ResponseFacade 
         HttpServletResponse response = null;
-        for(Object arg : args) {//RequestFacade
-        	if(ResponseFacade.class.equals(arg.getClass())||HttpServletResponse.class.equals(arg.getClass())) {
-        		response = (HttpServletResponse) arg;
-        	}
-        }
+//        for(Object arg : args) {//RequestFacade
+//        	if(ResponseFacade.class.equals(arg.getClass())||HttpServletResponse.class.equals(arg.getClass())) {
+//        		response = (HttpServletResponse) arg;
+//        	}
+//        }
         
         
         
