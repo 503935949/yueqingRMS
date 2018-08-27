@@ -2,6 +2,7 @@ package com.yueqingRMS.business.knowledgebase.email.service.Impl;
 
 import java.io.File;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -20,9 +21,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.alibaba.fastjson.JSON;
+import com.yueqingRMS.business.knowledgebase.demo.domain.DemoDomain;
 import com.yueqingRMS.business.knowledgebase.email.domain.MailDomain;
 import com.yueqingRMS.business.knowledgebase.email.service.IMailService;
 import com.yueqingRMS.platform.exception.AppBusinessException;
+import com.yueqingRMS.platform.freemarker.FreeMarkerTemplateFactory;
 import com.yueqingRMS.platform.tools.page.Page;
 import com.yueqingRMS.platform.util.MailUtil;
 import com.yueqingRMS.platform.util.SpringContextHolder;
@@ -270,8 +273,12 @@ public  class MailServiceImpl  implements IMailService{
 		        		+ "<a href='http://www.baidu.com'>【百度一下】</a>"
 		        		+ "<img src=\"cid:apple\">"
 		        		+ "</body></html>";
-		if(StringUtils.isNotEmpty(mailDomain.getContent())) {
-			content = mailDomain.getContent();
+		if(StringUtils.isEmpty(mailDomain.getContent())) {
+			try {
+				content = FreeMarkerTemplateFactory.getTemplateOnString("SimpleEmail", null);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 		
         try {
@@ -300,9 +307,23 @@ public  class MailServiceImpl  implements IMailService{
 		String content =  "<html lang='zh-CN'><head ><meta charset='utf-8'></head><body>"
 						+ mailDomain.getContent()
 		        		+ "</body></html>";
-//		if(StringUtils.isNotEmpty(mailDomain.getContent())) {
-//			content = mailDomain.getContent();
-//		}
+		if(StringUtils.isEmpty(mailDomain.getContent())) {
+			List<DemoDomain> DemoDomains = new ArrayList<DemoDomain>();
+			for(int i=0;i<10;i++){
+				DemoDomain d= new DemoDomain();
+				d.setOrgId(i+"");
+				d.setOrgName("orgName"+i);
+				DemoDomains.add(d);
+			}
+			Map<String,Object> root=new HashMap<String,Object>();
+			root.put("DemoDomains",DemoDomains);
+			
+			try {
+				content = FreeMarkerTemplateFactory.getTemplateOnString("SimpleEmail", root);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
 		String[] to = null;
 		 // 设置收件人邮箱
         if (mailDomain.getToEmails()!=null) {
